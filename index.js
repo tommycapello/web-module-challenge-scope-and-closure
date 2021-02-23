@@ -2,13 +2,13 @@
 
 /**Example Task : processFirstItem()
  * This example shows how you might go about solving the rest of the tasks
- * 
+ *
  * Use the higher order function processFirstItem below to do the following:
  *  1. Receive an array of strings in a parameter
  *  2. Receive a callback function that takes a string as its argument in a parameter
- *  3. Return the result of invoking the callback function and passing in the FIRST 
+ *  3. Return the result of invoking the callback function and passing in the FIRST
  *     element in the array as the argument
- * 
+ *
  * The following code is demonstrating a way of completing this task
  * It returns the string `foofoo`
 */
@@ -24,15 +24,25 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
 ///// M V P ///////
 
 /*Task 1: counterMaker()
-  
+
   Study the code for counter1 and counter2, then answer the questions below.
-  
+
   1. What is the difference between counter1 and counter2?
-  
+
+  The difference between both sets of code is where the variable "count" was declared and in counter1, the counterMaker() function is stored as a variable counter1. In counter1, the "count" is declared inside
+  the function counterMaker() and the function counter() is nested inside. In counter2, the "count" variable is declared outside the function and could be used by a different function. Both "count" variables are
+  declared on a different scope.
+
   2. Which of the two uses a closure? How can you tell?
-  
-  3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
+
+  Both functions use closures because all functions in JavaScript are closures. They remember the outer variables and where they are created. In the counter1 code, the function counter() is variable that stores the counterMaker()
+  function stored inside.
+
+  3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better?
+
+  The counter1 code might be preferable if we wanted tighter control on the scope of all the variables inside of the counterMaker() function. The code of counter2 is useful if we did not need to resuse the task and if the
+  functino only had one specific task.
+
 */
 
 // counter1 code
@@ -56,42 +66,52 @@ function counter2() {
 /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
 Use the inning function below to do the following:
   1. Return a random whole number of points between 0 and 2 scored by one team in an inning
-  
+
   For example: invoking inning() should return a numerical score value of 0, 1, or 2
-  
+
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  return Math.floor(Math.random() * 2);
 }
+
 
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
-  1. Receive the callback function `inning` that was created in Task 2 
+  1. Receive the callback function `inning` that was created in Task 2
   2. Receive a number of innings to be played
   3. After each inning, update the score of the home and away teams
   4. After the last inning, return an object containing the final (total) score of the innings played
-  
+
   For example: invoking finalScore(inning, 9) might return this object:
 {
   "Home": 11,
   "Away": 5
 }
-*/ 
+*/
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
-}
+function finalScore(inning, toPlay){
+  let homeScore = 0;
+  let awayScore = 0;
+  let finalTally = {};
+  for(let i=0; i < toPlay; i++){
+    homeScore =+ inning();
+    awayScore =+ inning();
+  };
+  return  finalTally = {"Home":homeScore, "Away":awayScore}}
+
+console.log(finalScore(inning, 12));
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
-  1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
+  1. Receive a callback function - you will pass in the inning function from task 2 as your argument
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inning) {
+  let inningScore = {};
+  return inningScore = {"Home":inning(), "Away":inning()};
 }
 
 
@@ -104,36 +124,36 @@ Use the scoreboard function below to do the following:
   Home and Away team's scores for each inning.  Not the cummulative score.
   5. If there's a tie at the end of the innings, add this message containing the score to the end of the array:  "This game will require extra innings: Away 12 - Home 12"  (see tie example below)
      If there isn't a tie, add this message to the end of the array: "Final Score: Away 13 - Home 11"  (see no tie example below)
-  
-  NO TIE example: invoking scoreboard(getInningScore,inning, 9) might return 
+
+  NO TIE example: invoking scoreboard(getInningScore,inning, 9) might return
   an array of strings like this:
 [
-  "Inning 1: Away 1 - Home 2", 
+  "Inning 1: Away 1 - Home 2",
   "Inning 2: Away 2 - Home 1",
-  "Inning 3: Away 0 - Home 2", 
-  "Inning 4: Away 2 - Home 2", 
-  "Inning 5: Away 2 - Home 0", 
-  "Inning 6: Away 1 - Home 1", 
-  "Inning 7: Away 0 - Home 2", 
+  "Inning 3: Away 0 - Home 2",
+  "Inning 4: Away 2 - Home 2",
+  "Inning 5: Away 2 - Home 0",
+  "Inning 6: Away 1 - Home 1",
+  "Inning 7: Away 0 - Home 2",
   "Inning 8: Away 2 - Home 2",
-  "Inning 9: Away 1 - Home 0", 
-  "Final Score: Away 11 - Home 12"  
+  "Inning 9: Away 1 - Home 0",
+  "Final Score: Away 11 - Home 12"
 ]
 
-  TIE example: invoking scoreboard(getInningScore,inning, 9) might return 
+  TIE example: invoking scoreboard(getInningScore,inning, 9) might return
   an array of strings like this:
 [
-  "Inning 1: Away 1 - Home 1", 
+  "Inning 1: Away 1 - Home 1",
   "Inning 2: Away 2 - Home 2",
-  "Inning 3: Away 1 - Home 0", 
-  "Inning 4: Away 1 - Home 2", 
-  "Inning 5: Away 0 - Home 0", 
-  "Inning 6: Away 2 - Home 1", 
-  "Inning 7: Away 0 - Home 2", 
+  "Inning 3: Away 1 - Home 0",
+  "Inning 4: Away 1 - Home 2",
+  "Inning 5: Away 0 - Home 0",
+  "Inning 6: Away 2 - Home 1",
+  "Inning 7: Away 0 - Home 2",
   "Inning 8: Away 2 - Home 1",
-  "Inning 9: Away 1 - Home 1", 
+  "Inning 9: Away 1 - Home 1",
   "This game will require extra innings: Away 10 - Home 10"
-]  
+]
   */
 
 function scoreboard(/* CODE HERE */) {
