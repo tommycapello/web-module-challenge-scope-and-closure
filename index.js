@@ -29,7 +29,7 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
 
   1. What is the difference between counter1 and counter2?
 
-  The difference between both sets of code is where the variable "count" was declared and in counter1, the counterMaker() function is stored as a variable counter1. In counter1, the "count" is declared inside
+  The difference between both sets of code is where the variable "count" was declared and the counterMaker() function is stored as a variable in counter1. The "count" variable is declared inside
   the function counterMaker() and the function counter() is nested inside. In counter2, the "count" variable is declared outside the function and could be used by a different function. Both "count" variables are
   declared on a different scope.
 
@@ -99,10 +99,10 @@ function finalScore(inning, toPlay){
   for(let i=0; i < toPlay; i++){
     homeScore =+ inning();
     awayScore =+ inning();
-  };
+  }
   return  finalTally = {"Home":homeScore, "Away":awayScore}}
 
-console.log(finalScore(inning, 12));
+finalScore(inning, 12);
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -156,10 +156,11 @@ Use the scoreboard function below to do the following:
 ]
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(getInningScore, inning, inningsToPlay) {
+  for(i=0; i<inningsToPlay; i++){
+    return `Inning ${i}: Away ${inning()} - Home ${inning()}`;
+  }
 }
-
 
 
 
