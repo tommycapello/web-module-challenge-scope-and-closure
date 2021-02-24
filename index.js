@@ -154,14 +154,14 @@ Use the scoreboard function below to do the following:
 ]
   */
 function scoreboard(inningScoreCB, pointsCB, inningsToPlay) {
-  // let game = [];
-  // for(let i=1; i <= inningsToPlay; i++ ){
-  //  game.push(`Inning ${i}: Away ${inningScoreCB()["Away"]} - Home ${inningScoreCB()["Home"]}`);
-  // }
-  // return game;
+  let game = [];
+  for(let i=1; i <= inningsToPlay; i++ ){
+   game.push(`Inning ${i}: Away ${pointsCB()} - Home ${pointsCB()}`);
+  }
+  return game;
 }
 
-// console.log(scoreboard(getInningScore,inning,9));
+console.log(scoreboard(getInningScore,inning,9));
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
