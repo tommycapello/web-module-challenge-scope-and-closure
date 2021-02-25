@@ -155,12 +155,23 @@ Use the scoreboard function below to do the following:
   */
 function scoreboard(inningScoreCB, pointsCB, inningsToPlay) {
   let game = [];
+  let awayScore = 0;
+  let homeScore = 0;
   for(let i=1; i <= inningsToPlay; i++ ){
-   game.push(`Inning ${i}: Away ${pointsCB()} - Home ${pointsCB()}`);
+  awayScore = inningScoreCB(pointsCB).Away;
+  homeScore = inningScoreCB(pointsCB).Home;
+  game.push(`Inning ${i}: Away ${awayScore} - Home ${homeScore}`);
   }
-  return game;
+  let lastStatement = game.forEach(function(){
+    awayScore += inningScoreCB(pointsCB).Away;
+    homeScore += inningScoreCB(pointsCB).Home;
+  })
+  if(awayScore === homeScore){
+     lastStatement = [`This game will require extra innings: Away ${awayScore} - Home ${homeScore}`]
+  }else {lastStatement = [`Final Score: Away ${awayScore} - Home ${homeScore}`]
 }
-
+return game.concat(lastStatement);
+}
 console.log(scoreboard(getInningScore,inning,9));
 
 
